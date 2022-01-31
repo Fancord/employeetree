@@ -7,17 +7,17 @@ from mptt.models import MPTTModel, TreeForeignKey
 
 class Employee(MPTTModel):
     """Базовый класс сотрудника"""
-    fio = models.CharField(max_length=100, unique=True, verbose_name='ФИО')
-    position = models.CharField(blank=True, max_length=100, verbose_name='Должность')
-    salary_by_hour = models.FloatField(blank=True, default=0, verbose_name='Зарплата за час')
-    salary_sum = models.FloatField(blank=True, default=0, verbose_name='Всего выплачено')
-    firstday = models.DateField(default=timezone.now, verbose_name='Дата приема на работу')
-    level = models.IntegerField(blank=True, verbose_name='Уровень')
+    fio = models.CharField(max_length=100, unique=True, verbose_name='Full name')
+    position = models.CharField(blank=True, max_length=100, verbose_name='Position')
+    salary_by_hour = models.FloatField(blank=True, default=0, verbose_name='Salary by our')
+    salary_sum = models.FloatField(blank=True, default=0, verbose_name='Sum salary paid')
+    firstday = models.DateField(default=timezone.now, verbose_name='First day')
+    level = models.IntegerField(blank=True, verbose_name='Level')
     boss = TreeForeignKey('self',
                           on_delete=models.CASCADE,
                           null=True, blank=True,
                           related_name='children',
-                          verbose_name='Начальник')
+                          verbose_name='Boss')
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=True, null=True)
 
     def __str__(self):

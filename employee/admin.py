@@ -37,14 +37,10 @@ class CustomMPTTModelAdmin(MPTTModelAdmin):
                         Action
         Удаление информации об выплаченой зарплате
         """
-        row_update = queryset.update(salary_sum=0)
-        if row_update == '1':
-            message = 'Данные 1 записи были обновлены'
-        else:
-            message = f"Данные {row_update} записей были обновлены"
-        self.message_user(request, f"{message}")
+        queryset.update(salary_sum=0)
+        self.message_user(request, f"Data was updated")
 
-    delete_salary_sum.short_description = "Удалить данные о 'выплаченой зарплате'"
+    delete_salary_sum.short_description = "delete the info about 'sum salary paid'"
     delete_salary_sum.allowed_permisssion = ('change',)
 
 
